@@ -33,6 +33,10 @@ public class EnvironmentExp {
 
     public static class DoubleDefException extends Exception {
         private static final long serialVersionUID = -2733379901827316441L;
+
+        public DoubleDefException(String message) {
+            super(message);
+        }
     }
 
     /**
@@ -62,7 +66,6 @@ public class EnvironmentExp {
     public void declare(Symbol name, ExpDefinition def) throws DoubleDefException {
         if (assocNomDef.containsKey(name)) {
             throw new DoubleDefException("Symbol already defined in the environment");
-            System.exit(1);
         }
         assocNomDef.put(name, def);
         // throw new UnsupportedOperationException("not yet implemented");
