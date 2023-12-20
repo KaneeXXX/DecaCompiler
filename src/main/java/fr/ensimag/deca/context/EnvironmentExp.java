@@ -23,8 +23,8 @@ public class EnvironmentExp {
     // A FAIRE : implémenter la structure de donnée représentant un
     // environnement (association nom -> définition, avec possibilité
     // d'empilement).
-    HashMap<Symbol, ExpDefinition> assocNomDef;
-    EnvironmentExp parentEnvironment;
+    private HashMap<Symbol, ExpDefinition> assocNomDef;
+    private EnvironmentExp parentEnvironment;
     
     public EnvironmentExp(EnvironmentExp parentEnvironment) {
         this.parentEnvironment = parentEnvironment;
@@ -44,11 +44,13 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        // NASMANE NOTE: normalement on doit avoir un appel recursive pour trouver la 
-        // definition dans les env_parent si elle n'est pas dans le dictionnaire courant
-        // mais je suis pas sur, donc si les choses marches mal je reviens ici
-        return assocNomDef.get(key);
-        // throw new UnsupportedOperationException("not yet implemented");
+        if (!assocNomDef.containsKey(key)) {
+            return this.parentEnvironment.getAssocNomDef().get(key);
+            // Doute: pourquoi pas appel recursive + condition d arret si 
+            // env parent est 0 (cad class Object)
+        } else {
+            return assocNomDef.get(key);
+        }
     }
 
     /**
@@ -71,7 +73,10 @@ public class EnvironmentExp {
             throw new DoubleDefException("Symbol already defined in the environment");
         }
         assocNomDef.put(name, def);
-        // throw new UnsupportedOperationException("not yet implemented");
+    }
+
+    public HashMap<Symbol, ExpDefinition> getAssocNomDef() {
+        return this.assocNomDef;
     }
 
 }
