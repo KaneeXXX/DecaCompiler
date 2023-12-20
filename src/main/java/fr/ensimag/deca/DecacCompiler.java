@@ -126,8 +126,11 @@ public class DecacCompiler {
     public final SymbolTable symbolTable = new SymbolTable();
 
     public Symbol createSymbol(String name) {
-        return null; // A FAIRE: remplacer par la ligne en commentaire ci-dessous
-        // return symbolTable.create(name);
+        return symbolTable.create(name);
+    }
+
+    public SymbolTable getSymbolTable() {
+        return this.symbolTable;
     }
 
     /**
