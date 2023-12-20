@@ -44,6 +44,9 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
+        // NASMANE NOTE: normalement on doit avoir un appel recursive pour trouver la 
+        // definition dans les env_parent si elle n'est pas dans le dictionnaire courant
+        // mais je suis pas sur, donc si les choses marches mal je reviens ici
         return assocNomDef.get(key);
         // throw new UnsupportedOperationException("not yet implemented");
     }
