@@ -1,6 +1,7 @@
 package fr.ensimag.deca.tree;
 
 import fr.ensimag.deca.context.Type;
+import fr.ensimag.deca.context.TypeDefinition;
 import fr.ensimag.deca.context.VariableDefinition;
 import fr.ensimag.deca.DecacCompiler;
 import fr.ensimag.deca.context.ClassDefinition;
@@ -39,13 +40,14 @@ public class DeclVar extends AbstractDeclVar {
         if (type.isVoid()) {
             throw new ContextualError("Variable Type cannot be void", getLocation());
         }
-        this.varName.verifyType(compiler); // a verifier !!!!!!!!!
-        this.initialization.verifyInitialization(compiler, type, localEnv, currentClass);
+        TypeDefinition verifDef = new TypeDefinition(type, getLocation());
+        this.varName.setDefinition(verifDef);
         try {
             localEnv.declare(this.varName.getName(), this.varName.getVariableDefinition());
         } catch (Exception e) {
             throw new ContextualError("Variable déjà déclarée", getLocation());
         }
+        this.initialization.verifyInitialization(compiler, type, localEnv, currentClass);
     }
 
     
