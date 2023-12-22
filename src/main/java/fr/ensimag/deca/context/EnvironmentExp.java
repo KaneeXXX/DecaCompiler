@@ -44,12 +44,16 @@ public class EnvironmentExp {
      * symbol is undefined.
      */
     public ExpDefinition get(Symbol key) {
-        if (!assocNomDef.containsKey(key)) {
-            return this.parentEnvironment.getAssocNomDef().get(key);
+        if (assocNomDef.containsKey(key)) {
+            return assocNomDef.get(key);
             // Doute: pourquoi pas appel recursive + condition d arret si 
             // env parent est 0 (cad class Object)
         } else {
-            return assocNomDef.get(key);
+            if (this.parentEnvironment == null) {
+                return null;
+            } else {
+                return this.parentEnvironment.get(key);
+            }
         }
     }
 

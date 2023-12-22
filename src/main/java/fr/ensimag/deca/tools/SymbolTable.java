@@ -28,8 +28,9 @@ public class SymbolTable {
         if (map.containsKey(name)) {
             return map.get(name);
         } else {
-            map.put(name, new Symbol(name));
-            return map.get(name);
+            Symbol symbol = new Symbol(name);
+            map.put(name, symbol);
+            return symbol;
         }
     }
 
