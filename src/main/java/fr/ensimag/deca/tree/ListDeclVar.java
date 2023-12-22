@@ -1,7 +1,5 @@
 package fr.ensimag.deca.tree;
 
-import static fr.ensimag.deca.tree.Tree.LOG;
-
 import org.apache.log4j.Logger;
 
 import fr.ensimag.deca.DecacCompiler;
